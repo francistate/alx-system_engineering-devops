@@ -1,0 +1,117 @@
+# Secured and Monitored Web Infrastructure
+
+## Infrastructure Design for www.foobar.com
+
+### Components:
+1. **Load Balancer (HAproxy) with SSL Certificate**
+   - Distributes requests across servers
+   - Terminates SSL connections
+   - Serves encrypted HTTPS traffic
+
+2. **3 Firewalls**
+   - Firewall 1: Protects load balancer
+   - Firewall 2: Protects web/application servers
+   - Firewall 3: Protects database servers
+
+3. **3 Monitoring Clients**
+   - Data collectors for monitoring services (Sumologic/Datadog)
+   - Installed on each server for comprehensive monitoring
+
+4. **Web Server (Nginx)**
+   - Serves static content securely
+   - Protected by firewall
+
+5. **Application Server**
+   - Processes dynamic requests securely
+   - Protected by firewall
+
+6. **MySQL Database Cluster**
+   - Primary-Replica setup
+   - Protected by dedicated firewall
+
+## Why Additional Elements:
+
+**SSL Certificate:**
+- Encrypts data transmission between clients and servers
+- Provides authentication and data integrity
+- Enables HTTPS protocol for secure communication
+
+**Firewalls:**
+- Control network traffic based on security rules
+- Block unauthorized access attempts
+- Create network security perimeters
+- Filter malicious traffic
+
+**Monitoring Clients:**
+- Collect system and application metrics
+- Monitor server health and performance
+- Detect anomalies and issues
+- Enable proactive problem resolution
+
+## Security and Monitoring Details:
+
+**Purpose of Firewalls:**
+- Network security devices that filter traffic
+- Block unauthorized connections
+- Allow legitimate traffic based on rules
+- Protect against network-based attacks
+
+**HTTPS Traffic:**
+- Encrypts sensitive data (passwords, personal info)
+- Prevents man-in-the-middle attacks
+- Provides client authentication of server
+- Required for compliance and user trust
+
+**Monitoring Usage:**
+- Performance tracking and optimization
+- Capacity planning and resource management
+- Security incident detection
+- Service level agreement compliance
+- Root cause analysis for issues
+
+**Monitoring Data Collection:**
+- Agents installed on each server collect metrics
+- Data sent to centralized monitoring service
+- Metrics include: CPU, memory, disk, network usage
+- Application-specific metrics (response times, errors)
+- Log aggregation and analysis
+
+**Monitoring Web Server QPS (Queries Per Second):**
+1. Install monitoring agent on web server
+2. Configure agent to track HTTP request metrics
+3. Set up dashboards to visualize QPS trends
+4. Create alerts for QPS thresholds
+5. Analyze patterns for capacity planning
+
+## Infrastructure Issues:
+
+**SSL Termination at Load Balancer:**
+- Traffic between load balancer and backend servers is unencrypted
+- Internal network vulnerabilities remain exposed
+- Compliance requirements may not be met
+- **Solution:** Implement end-to-end encryption
+
+**Single MySQL Write Server:**
+- Primary database node is still a single point of failure
+- Write operations cannot scale horizontally
+- Database bottleneck limits system performance
+- **Solution:** Implement database clustering or sharding
+
+**All Servers with Same Components:**
+- Resource inefficiency (database on web servers)
+- Security risks (unnecessary services exposed)
+- Maintenance complexity increases
+- Potential performance conflicts
+- **Solution:** Separate roles and dedicated servers
+
+## Additional Recommendations:
+
+**Improved Architecture:**
+- Separate database servers from web/app servers
+- Implement database clustering for write scalability
+- Use dedicated monitoring infrastructure
+- Implement network segmentation
+- Add backup and disaster recovery systems
+
+## Diagram URL:
+[Insert diagram image URL here after creating whiteboard diagram]

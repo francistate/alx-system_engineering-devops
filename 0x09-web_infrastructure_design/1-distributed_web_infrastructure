@@ -1,0 +1,88 @@
+# Distributed Web Infrastructure
+
+## Infrastructure Design for www.foobar.com
+
+### Components:
+1. **Load Balancer (HAproxy)**
+   - Distributes incoming requests across multiple servers
+   - Provides high availability and scalability
+
+2. **Web Server (Nginx) - Server 1**
+   - Handles HTTP requests
+   - Serves static content
+
+3. **Application Server - Server 2**  
+   - Processes dynamic requests
+   - Executes application logic
+
+4. **Database (MySQL) Primary-Replica Cluster**
+   - Primary node: Handles writes and reads
+   - Replica node: Handles reads only
+
+5. **Application Files (Codebase)**
+   - Deployed on both web and application servers
+
+## Why Additional Elements:
+
+**Load Balancer (HAproxy):**
+- Eliminates single point of failure at entry point
+- Distributes traffic load across multiple servers
+- Provides failover capability
+
+**Additional Servers:**
+- Separates concerns (web serving vs application processing)
+- Increases overall system capacity
+- Provides redundancy
+
+## Load Balancer Configuration:
+
+**Distribution Algorithm: Round Robin**
+- Requests are distributed sequentially across available servers
+- Each server gets equal number of requests over time
+- Simple and effective for servers with similar capacity
+
+**Active-Active Setup:**
+- All servers are actively serving requests simultaneously
+- Load is distributed across all available servers
+- Better resource utilization
+- Higher throughput capacity
+
+**Active-Passive Alternative:**
+- One server actively serves while others remain on standby
+- Standby servers activate only when primary fails
+- Lower resource utilization but simpler failover
+
+## Database Primary-Replica Cluster:
+
+**How it works:**
+- Primary node handles all write operations
+- Changes are replicated to replica nodes
+- Replica nodes can handle read operations
+- Provides data redundancy and read scalability
+
+**Primary Node vs Replica Node:**
+- **Primary:** Accepts writes and reads, authoritative data source
+- **Replica:** Read-only copy, receives updates from primary
+- **Application impact:** Write operations must go to primary, reads can use either
+
+## Infrastructure Issues:
+
+**Single Points of Failure (SPOF):**
+- Load balancer itself is a SPOF
+- Primary database node is a SPOF for writes
+- If load balancer fails, entire system becomes unavailable
+
+**Security Issues:**
+- No firewall protection
+- No HTTPS encryption
+- Data transmitted in plain text
+- No access control mechanisms
+
+**No Monitoring:**
+- No visibility into system performance
+- Cannot detect issues proactively
+- No metrics for capacity planning
+- Difficult to troubleshoot problems
+
+## Diagram URL:
+[Insert diagram image URL here after creating whiteboard diagram]

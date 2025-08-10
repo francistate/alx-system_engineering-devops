@@ -1,0 +1,78 @@
+# Simple Web Stack Infrastructure
+
+## Infrastructure Design for www.foobar.com
+
+### Components:
+1. **Server** (IP: 8.8.8.8)
+   - Physical or virtual machine hosting all components
+
+2. **Web Server (Nginx)**
+   - Handles HTTP requests from users
+   - Serves static content
+   - Acts as reverse proxy to application server
+
+3. **Application Server**
+   - Processes dynamic requests
+   - Executes application logic
+   - Generates dynamic content
+
+4. **Application Files (Codebase)**
+   - Contains the website's source code
+   - Business logic and application scripts
+
+5. **Database (MySQL)**
+   - Stores and manages application data
+   - Handles data persistence
+
+6. **Domain Name (foobar.com)**
+   - Human-readable address for the website
+   - DNS configured with www record pointing to 8.8.8.8
+
+## Component Explanations:
+
+**What is a server?**
+A server is a computer system that provides services, data, or programs to other computers (clients) over a network.
+
+**Role of domain name:**
+The domain name provides a human-readable address that maps to the server's IP address through DNS resolution.
+
+**DNS record type for www:**
+The "www" in www.foobar.com is a CNAME record that points to the root domain, which has an A record pointing to 8.8.8.8.
+
+**Role of web server:**
+- Accepts HTTP requests from clients
+- Serves static files (HTML, CSS, JS, images)
+- Forwards dynamic requests to application server
+- Returns responses to clients
+
+**Role of application server:**
+- Executes application code
+- Processes business logic
+- Generates dynamic content
+- Communicates with database
+
+**Role of database:**
+- Stores application data persistently
+- Manages data integrity and consistency
+- Provides data retrieval and storage services
+
+**Server communication protocol:**
+The server uses HTTP/HTTPS protocol to communicate with user computers requesting the website.
+
+## Infrastructure Issues:
+
+**Single Point of Failure (SPOF):**
+- If the single server fails, entire website becomes unavailable
+- Database, web server, and application server all on one machine
+
+**Downtime during maintenance:**
+- Deploying new code requires restarting services
+- Server maintenance causes complete service interruption
+
+**Cannot scale with traffic:**
+- Single server has limited processing capacity
+- No load distribution mechanism
+- Performance degrades with high traffic volume
+
+## Diagram URL:
+[Insert diagram image URL here after creating whiteboard diagram]
